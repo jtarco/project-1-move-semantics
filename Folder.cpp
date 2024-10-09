@@ -152,12 +152,13 @@ bool Folder::moveFileTo(const std::string& name, Folder& destination) {
    std::vector<File>::iterator it = files_.begin();
    for (it; it != files_.end(); ++it) {
       if (it->getName() == name) {
-         destination.addFile(*it);
+         files_.erase(it);
+         return destination.addFile(*it);
          // should I call remove file?
          // again do I need this->?
          // return removeFile(it->getName())
-         files_.erase(it);
-         return true;
+         // files_.erase(it);
+         // return true;
       }
    }
 
