@@ -71,3 +71,118 @@ void Folder::display() {
 //             (unless you want your work to be tested incorrectly)
 //    That also means includes. Remember, all other includes go in .hpp
 // =========================== YOUR CODE HERE ===========================
+
+/**
+* @brief Iterate through the files vector, calculating the total size of all child files
+* @return size_t The total size of all child files
+*/
+size_t Folder::getSize() const {
+   size_t size = 0;
+   std::vector<File>::const_iterator it = files_.begin(); // problem with const
+   // might need to add const to bool functions
+   for (it; it != files_.end(); ++it) {
+      size += it->getSize();  // Do I need to dereference first or does the arrow take care of that?
+   }
+   return size;
+}
+
+/**
+* @brief Appends the given file to the files_ vector using move_semantics on the parameter File object, if a file with the same name does not exist within the files_ vector
+   *    (HINT!) Consider push_back(). What happens when we give it an l-value vs. an r-value? Does it change anything?
+   * 
+   * @param new_file A reference to a File object to be added. If the name of the File object is empty (ie. its contents have been taken via move) the add fails  
+   * @return True if the file was added successfully. False otherwise.
+   * @post If the file was added, leaves the parameter File object in a valid but unspecified state
+   */
+bool Folder::addFile(File& new_file) {
+   if (new_file.getName() == "") {
+      return false;
+   }
+
+   std::vector<File>::iterator it = files_.begin();
+   for (it; it != files_.end(); ++it) {
+      if (it->getName() == new_file.getName()) {
+         return false;
+      }
+   }
+
+   files_.push_back(std::move(new_file));
+   return true;
+}
+
+/**
+ * @brief Searches for a file within the files_ vector to be deleted.
+ * If a file object with a matching name is found, erase it from the vector in linear [O(N)] time or better.
+ * Order does not matter.
+ * 
+ * @param name A const reference to a string representing the filename to be deleted
+ * @return True if the file was found & successfully deleted. 
+ */
+bool Folder::removeFile(const std::string& name) {
+   std::vector<File>::iterator it = files_.begin();
+   for (it; it != files_.end(); ++it) {
+      if (it->getName() == name) {
+         files_.erase(it);
+         return true;
+      }
+   }
+
+   return false;
+}
+
+/**
+ * @brief Moves a file from the current folder to a specified folder 
+ * If a matching name is found, use move semantics to move the object from the current directory to the file vector within the destination folder'
+ *    and erase it from the current folder. 
+ * If a matching name is not found within the source folder or an object with the same name already exists within the 
+ *    destination folder, nothing is moved.
+ * If the source folder and destination folders are the same, the move is always considered successful.
+ * 
+ * @param name The name of the file to be moved, as a const reference to a string
+ * @param destination The target folder to be moved to, as a reference to a Folder object
+ * @return True if the file was moved successfully. False otherwise.
+ */
+bool Folder::moveFileTo(const std::string& name, Folder& destination) {
+   // this-> needed?
+   if (this->getName() == destination.getName()) return true;
+
+
+   // move semantics needed?
+   // addFile uses std::move
+   std::vector<File>::iterator it = files_.begin();
+   for (it; it != files_.end(); ++it) {
+      if (it->getName() == name) {
+         destination.addFile(*it);
+         // should I call remove file?
+         // again do I need this->?
+         // return removeFile(it->getName())
+         files_.erase(it);
+         return true;
+      }
+   }
+
+   return false;
+}
+
+/**
+   * @brief Copies a file within the current folder to the destination folder.
+   * If there is already an object with the same name in the destination folder, 
+   *    or the object with the specified name does not exist, do nothing.                                                                                                                                                                                                                                                       
+   * Otherwise, if there exists a file with the given name from the source folder, 
+   *    use the copy constructor or assignment operations to create a deep copy of the 
+   *    the file into the destination.
+   * 
+   * @param name The name of the copied object, as a const string reference
+   * @param destination The destination folder, as a reference to a Folder object
+   * @return True if the file was copied successfully. False otherwise.
+   */
+bool Folder::copyFileTo(const std::string& name, Folder& destination) const {
+   std::vector<File>::const_iterator it = files_.begin();
+   for (it; it != files_.end(); ++it) {
+      if (it->getName() == name) {
+         File copy(*it);
+         return destination.addFile(copy);
+      }
+   }
+   return false;
+}
