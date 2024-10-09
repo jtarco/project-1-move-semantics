@@ -8,16 +8,19 @@ int main() {
 
    // Testing Default/Parameterized Constructor
    // try {
-   //    File a; // Works
-   //    File b("Homework"); // Works
-   //    std::cout << a << '\n' << b << '\n';
+   //    // File a; // Works
+   //    // File b("Homework"); // Works
+   //    // std::cout << a << '\n' << b << '\n';
 
-   //    File c("Homework."); // Doesn't work
-   //    // Forgot to decrement iterator, now works.
-   //    std::cout << c << '\n';
+   //    // File c("Homework."); // Doesn't work
+   //    // // Forgot to decrement iterator, now works.
+   //    // std::cout << c << '\n';
 
-   //    File d("Homework.."); // Fails as expected.
-   //    std::cout << d << '\n';
+   //    // File d("Homework.."); // Fails as expected.
+   //    // std::cout << d << '\n';
+
+   //    File e(""); // Failed to account for ""
+   //    std::cout << e << '\n';
    // } catch (const InvalidFormatException& e) {
    //    std::cerr << e.what() << std::endl;
    // }

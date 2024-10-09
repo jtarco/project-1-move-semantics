@@ -65,27 +65,30 @@ bool File::operator<(const File& rhs) const {
 *       Yes, this means we can define override the default constructor and define a parameterized one simultaneously.
 */
 File::File(const std::string& filename, const std::string& contents, int* icon) : filename_{filename}, contents_{contents}, icon_{icon} {
-   bool one_period = false;
-   std::string::const_iterator it = filename.begin();
-   for (it; it != filename.end(); ++it) {
-      if (!std::isalnum(*it)) {
-         if (*it == '.' && !one_period) {
-            one_period = true;
-         } else {
-            throw InvalidFormatException("Invalid file name: " + filename);
+   if (filename.empty()) {
+      filename_ = "NewFile.txt";
+   } else {
+      bool one_period = false;
+      std::string::const_iterator it = filename.begin();
+      for (it; it != filename.end(); ++it) {
+         if (!std::isalnum(*it)) {
+            if (*it == '.' && !one_period) {
+               one_period = true;
+            } else {
+               throw InvalidFormatException("Invalid file name: " + filename);
+            }
          }
       }
+
+      // Decrement iterator to access last character of filename
+      --it;
+
+      if (!one_period) {
+         filename_ = filename + ".txt";
+      } else if (*it == '.') {
+         filename_ = filename + "txt";
+      }
    }
-
-   // Decrement iterator to access last character of filename
-   --it;
-
-   if (!one_period) {
-      filename_ = filename + ".txt";
-   } else if (*it == '.') {
-      filename_ = filename + "txt";
-   }
-
    // Do I need to dynamically allocate memory for icon array?
 }
 
