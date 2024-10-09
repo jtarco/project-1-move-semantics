@@ -2,6 +2,8 @@
 #include "Folder.hpp"
 #include "InvalidFormatException.hpp"
 #include <iostream>
+#include <cassert>
+#include <string>
 
 int main() {
    // File Class
@@ -58,6 +60,65 @@ int main() {
    //    File a("Homework", "Content yay", p);
    // }
 
+   // Folder
+   
+   // Testing getSize() and addfile() Works as expected
+   // File a("Hi.txt", "Four");
+   // File b("Hola.txt", "Four");
+   // Folder c;
+   // assert(c.addFile(a) == true);
+   // assert(c.addFile(b) == true);
+   // assert(c.addFile(b) == false);
+   // assert(c.getSize() == 8);
+   // c.display();
+
+   // Testing removeFile()
+   // File a("Que.txt", "Four");
+   // // std::cout << a.getName() << std::endl;
+   // File b("No.txt");
+   // Folder c;
+   // c.addFile(a);
+   // // c.display();
+   // // std::cout << a.getName() << "\t" << b.getName() << "\n";
+   // assert(c.removeFile("Que.txt") == true);
+   // assert(c.removeFile("No.txt") == false);
+
+   // Testing moveFileTo();
+   // Folder source("s");
+   // Folder destinatio("d");
+   // File a("One");
+   // File b("Two");
+   // source.addFile(a);
+   // source.addFile(b);
+   // destinatio.addFile(b);
+   // // assert(source.moveFileTo("One", source) == true);
+   // // assert(source.moveFileTo("One", destination) == true);
+   // assert(source.moveFileTo("Two", destinatio) == false);
+   // // assert(source.moveFileTo("Two", destination) == false);
+   // source.display();
+   // destinatio.display();
+
+   // // Testing copyFileTo()
+   // Folder source("source");
+   // Folder destination("destination");
+   // File one("1.bf");
+   // File two("2.bf");
+   // File three("3.bf");
+   // File four("4.bf");
+   // source.addFile(one);
+   // source.addFile(two);
+   // source.addFile(three);
+   // destination.addFile(four);
+   // // source.display();
+   // // std::cout << "\n";
+   // // source.copyFileTo("1.bf", destination);
+   // // source.copyFileTo("2.bf", destination);
+   // // source.copyFileTo("3.bf", destination);
+   // assert(source.copyFileTo("4.bf", destination) == false);
+   // assert(destination.copyFileTo("4.bf", source) == true);
+   // source.display();
+   // std::cout << "\n";
+   // destination.display();
 }
 // DONE: Default/Parameterized Constructor
 // DONE: getSize()
@@ -68,9 +129,9 @@ int main() {
 // DONE: Destructor
 // Tested 7/7 File Member Functions
 
-// TODO: getSize();
-// TODO: addFile();
-// TODO: removeFile();
-// TODO: moveFileTo();
-// TODO: copyFileTo();
-// Tested 0/5 Folder Functions
+// DONE: getSize();
+// DONE: addFile();
+// DONE: removeFile();
+// DONE: moveFileTo();
+// DONE: copyFileTo();
+// Tested 5/5 Folder Functions

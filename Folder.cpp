@@ -72,6 +72,14 @@ void Folder::display() {
 //    That also means includes. Remember, all other includes go in .hpp
 // =========================== YOUR CODE HERE ===========================
 
+/*
+   CS335
+   Joey Tarco
+   Project 1
+
+   Implemented getSize(), addFile(), removeFile(), moveFileTo(), and copyFileTo()
+*/
+
 /**
 * @brief Iterate through the files vector, calculating the total size of all child files
 * @return size_t The total size of all child files
@@ -144,16 +152,18 @@ bool Folder::removeFile(const std::string& name) {
  */
 bool Folder::moveFileTo(const std::string& name, Folder& destination) {
    // this-> needed?
-   if (this->getName() == destination.getName()) return true;
-
+   if (this->getName() == destination.getName()) {
+      return true;
+   }
 
    // move semantics needed?
    // addFile uses std::move
    std::vector<File>::iterator it = files_.begin();
    for (it; it != files_.end(); ++it) {
       if (it->getName() == name) {
+         File to_be_moved = std::move(*it);
          files_.erase(it);
-         return destination.addFile(*it);
+         return destination.addFile(to_be_moved);
          // should I call remove file?
          // again do I need this->?
          // return removeFile(it->getName())
