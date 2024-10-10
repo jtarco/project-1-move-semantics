@@ -160,7 +160,7 @@ bool Folder::moveFileTo(const std::string& name, Folder& destination) {
       if (it->getName() == name) return false;
    }
 
-   std::vector<File>::iterator it = files_.begin();
+   it = files_.begin();
    for (it; it != files_.end(); ++it) {
       if (it->getName() == name) {
          File to_be_moved = std::move(*it);

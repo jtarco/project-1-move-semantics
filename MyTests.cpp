@@ -1,5 +1,5 @@
 #include "File.hpp"
-// #include "Folder.hpp"
+#include "Folder.hpp"
 #include "InvalidFormatException.hpp"
 #include <iostream>
 #include <cassert>
