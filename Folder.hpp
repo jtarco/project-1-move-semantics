@@ -52,7 +52,13 @@ class Folder {
       //                       DO NOT EDIT ABOVE THIS LINE. 
       //                  (with exceptions to include statements)
       // =========================== YOUR CODE HERE ===========================
+      /*
+         CS335
+         Joey Tarco
+         Project 1
 
+         Declared getSize(), addFile(), removeFile(), moveFileTo(), copyFileTo() functions.
+      */
       /**
       * @brief Iterate through the files vector, calculating the total size of all child files
       * @return size_t The total size of all child files

@@ -68,6 +68,7 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
    if (filename.empty()) {
       filename_ = "NewFile.txt";
    } else {
+      // check filename is valid
       bool one_period = false;
       std::string::const_iterator it = filename.begin();
       for (it; it != filename.end(); ++it) {
@@ -105,6 +106,7 @@ size_t File::getSize() const {
  * @param rhs A const reference to the file to be copied from
  */
 File::File(const File& rhs) : filename_{rhs.getName()}, contents_{rhs.getContents()} {
+   // deep copy of icon_
    int* temp = rhs.getIcon();
    if (temp) {
       icon_ = new int[ICON_DIM];
@@ -153,6 +155,7 @@ File& File::operator=(const File& rhs) {
 File::File(File&& rhs) {
    filename_ = std::move(rhs.filename_);
    contents_ = std::move(rhs.contents_);
+   delete[] icon_;
    icon_ = rhs.getIcon();
    rhs.icon_ = nullptr;
 }
