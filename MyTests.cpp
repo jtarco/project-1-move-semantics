@@ -1,5 +1,5 @@
 #include "File.hpp"
-#include "Folder.hpp"
+// #include "Folder.hpp"
 #include "InvalidFormatException.hpp"
 #include <iostream>
 #include <cassert>
@@ -43,6 +43,21 @@ int main() {
    // File b("Homework.txt", "Content yay");
    // a = b;
    // std::cout << a << "\n\n" << b << '\n';
+
+   // // Testing Deep Copy Of Copy Constructor and Assignment
+   // int* p = new int[256];
+   // for (int i = 0; i < 256; i++) {
+   //    p[i] = i + 1;
+   //    std::cout << p[i] << "\n";
+   // }
+   // File a("a", "content", p);
+   // File b(a);
+   // File c = a;
+   // int* d = b.getIcon();
+   // int* e = c.getIcon();
+   // for (int i = 0; i < 256; i++) {
+   //    std::cout << d[i] << "\t" << e[i] << "\n"; 
+   // }
 
    // // Testing Move Constructor
    // File a("Homework.txt", "Content yay");
@@ -119,6 +134,7 @@ int main() {
    // source.display();
    // std::cout << "\n";
    // destination.display();
+
 }
 // DONE: Default/Parameterized Constructor
 // DONE: getSize()

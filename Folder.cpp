@@ -151,13 +151,15 @@ bool Folder::removeFile(const std::string& name) {
  * @return True if the file was moved successfully. False otherwise.
  */
 bool Folder::moveFileTo(const std::string& name, Folder& destination) {
-   // this-> needed?
    if (this->getName() == destination.getName()) {
       return true;
    }
 
-   // move semantics needed?
-   // addFile uses std::move
+   std::vector<File>::iterator it = destination.files_.begin();
+   for (it; it != destination.files_.end(); ++it) {
+      if (it->getName() == name) return false;
+   }
+
    std::vector<File>::iterator it = files_.begin();
    for (it; it != files_.end(); ++it) {
       if (it->getName() == name) {
