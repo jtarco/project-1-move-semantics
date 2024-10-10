@@ -89,7 +89,6 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
          filename_ = filename + "txt";
       }
    }
-   // Do I need to dynamically allocate memory for icon array?
 }
 
 /**
@@ -105,7 +104,18 @@ size_t File::getSize() const {
  * @brief (COPY CONSTRUCTOR) Constructs a new File object as a deep copy of the target File
  * @param rhs A const reference to the file to be copied from
  */
-File::File(const File& rhs) : filename_{rhs.getName()}, contents_{rhs.getContents()}, icon_{rhs.getIcon()} {}
+File::File(const File& rhs) : filename_{rhs.getName()}, contents_{rhs.getContents()} {
+   int* temp = rhs.getIcon();
+   if (temp) {
+      icon_ = new int[ICON_DIM];
+      for (int i = 0; i < ICON_DIM; i++) {
+         icon_[i] = temp[i];
+      }
+   } else {
+      icon_ = nullptr;
+   }
+   temp = nullptr;
+}
 
 /**
  * @brief (COPY ASSIGNMENT) Replaces the calling File's data members using a deep copy of the rhs File.
@@ -118,7 +128,16 @@ File& File::operator=(const File& rhs) {
    if (this != &rhs) {
       filename_ = rhs.getName();
       contents_ = rhs.getContents();
-      icon_ = rhs.getIcon();
+      int* temp = rhs.getIcon();
+      if (temp) {
+         icon_ = new int[ICON_DIM];
+         for (int i = 0; i < ICON_DIM; i++) {
+            icon_[i] = temp[i];
+         }
+      } else {
+         icon_ = nullptr;
+      }
+      temp = nullptr;
    }
    
    return *this;

@@ -54,7 +54,14 @@ class File {
       //                       DO NOT EDIT ABOVE THIS LINE. 
       //                  (with exceptions to include statements)
       // =========================== YOUR CODE HERE ===========================
-      
+      /*
+         CS335
+         Joey Tarco
+         Project 1
+
+         Declared Default/Parameterized Constructor, Copy Constructor, Copy Assignment Operator,
+         Move Constructor, Move Assignemnt Operator, Destructor, and getSize() function.
+      */
       /**
       * @brief Constructs a new File object.
       * 
